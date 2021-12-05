@@ -1,0 +1,15 @@
+default: &default
+ adapter: postgresql
+ encoding: unicode
+ host: db
+ username: postgres
+ password: embarcas
+ pool: 5
+
+development:
+ <<: *default
+ database: embarcas_development
+
+test:
+ <<: *default
+ database: embarcas_test
