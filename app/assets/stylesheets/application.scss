@@ -13,3 +13,12 @@
  *= require_tree .
  *= require_self
  */
+ @import "bootstrap";
+
+.btn-outline-success, .btn-outline-success:hover, .btn-outline-success:focus, .btn-outline-success:active, .btn-outline-success:active:focus {
+  color: #000 !important;
+  background-color: #ffff00 !important;
+  background-image: none;
+  border-color: #ffff00 !important;
+  box-shadow: none !important;
+}
