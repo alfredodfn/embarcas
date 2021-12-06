@@ -44,6 +44,12 @@ group :development, :test do
   # A RuboCop extension focused on enforcing Rails best practices and coding conventions.
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false
+  # rspec-rails brings the RSpec testing framework to Ruby on Rails as a drop-in alternative to its default testing framework, Minitest.
+  gem 'rspec-rails', '~> 4.1.0'
+  # factory_bot is a fixtures replacement with a straightforward definition syntax
+  gem 'factory_bot_rails'
+  # Shoulda Matchers provides RSpec- and Minitest-compatible one-liners to test common Rails functionality that, if written by hand, would be much longer, more complex, and error-prone.
+  gem 'shoulda-matchers', '~> 4.0'
 end
 
 group :development do
@@ -62,6 +68,3 @@ group :test do
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'
 end
-
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
