@@ -1,24 +1,21 @@
+# frozen_string_literal: true
+
 class City < ApplicationRecord
   belongs_to :state
-  searchkick word_middle: [:name, :shortname, :state_name, :state_shortname]
+  searchkick word_middle: %i[name shortname state_name state_shortname]
 
-  validates_presence_of :name, :shortname
+  validates :name, :shortname, presence: true
 
   def search_data
     attributes.merge(
       name: name,
       shortname: shortname,
-      state_name: self.state_name,
-      state_shortname: self.state_shortname
+      state_name: state_name,
+      state_shortname: state_shortname
     )
   end
 
-  def state_name
-    self.state.name
-  end
+  delegate :name, to: :state, prefix: true
 
-  def state_shortname
-    self.state.shortname
-  end
-
+  delegate :shortname, to: :state, prefix: true
 end

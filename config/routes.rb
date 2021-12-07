@@ -6,5 +6,5 @@ Rails.application.routes.draw do
     collection do
       get :autocomplete
     end
-  end 
+  end
 end
