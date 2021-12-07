@@ -36,4 +36,48 @@ RSpec.describe City, type: :model do
     it { should belong_to(:state) }
   end
 
+  context "searches", search: true do
+    it "with name" do
+      city = create(:city)
+      City.search_index.refresh
+      search_results = City.search "Curitiba", fields: [:name]
+      expect(search_results.count).to eq(1)
+    end
+
+    it "with shortname" do
+      city = create(:city)
+      City.search_index.refresh
+      search_results = City.search "CWB", fields: [:shortname]
+      expect(search_results.count).to eq(1)
+    end
+
+    it "with invalid param" do
+      city = create(:city)
+      City.search_index.refresh
+      search_results = City.search "abacate", fields: [:name]
+      expect(search_results.count).to eq(0)
+    end
+
+    it "with partial name" do
+      city = create(:city)
+      City.search_index.refresh
+      search_results = City.search "Curit", fields: [:name], match: :word_middle
+      expect(search_results.count).to eq(1)
+    end
+
+    it "with state name" do
+      city = create(:city)
+      City.search_index.refresh
+      search_results = City.search "Paraná", fields: [:name, :state_name], match: :word_middle
+      expect(search_results.count).to eq(1)
+    end
+
+    it "with state name misspelling" do
+      city = create(:city)
+      City.search_index.refresh
+      search_results = City.search "Parna", fields: [:name, :state_name], match: :word_middle, misspellings: {edit_distance: 2}
+      expect(search_results.count).to eq(1)
+    end
+  end
+
 end

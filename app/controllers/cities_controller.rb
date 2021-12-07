@@ -2,7 +2,6 @@ class CitiesController < ApplicationController
   
   def index
     @cities = params[:query].present? ? City.search(params[:query]) : []
-    Rails.logger.info "\n\n\n\n\nok: #{@cities.inspect}"
   end
 
   def autocomplete
